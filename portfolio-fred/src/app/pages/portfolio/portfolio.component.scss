@@ -1,0 +1,217 @@
+.portfolio-container {
+  max-width: 1020px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 30px;
+
+  .profile-photo {
+    width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.headline {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.contact a {
+  color: #007acc;
+  text-decoration: none;
+}
+
+section {
+  margin-bottom: 30px;
+
+  h2 {
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 5px;
+  margin: 0;
+
+  h3 {
+    color: #007acc;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
+.timeline {
+  position: relative; /* necessário para posicionamento da linha */
+  padding-left: 40px;
+
+  /* Linha vertical central */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10px; 
+    width: 4px;
+    height: 100%;
+    background-color: #007bff;
+    border-radius: 2px;
+    z-index: 1; /* linha atrás das bolinhas */
+  }
+
+  .timeline-item {
+    position: relative; /* necessário para posicionamento da bolinha */
+    margin-bottom: 30px;
+    padding-left: 20px;
+
+    /* Bolinha para cada item */
+    &::before {
+      content: '';
+      position: absolute;
+      left: -39px; 
+      top: 5px;
+      width: 16px;
+      height: 16px;
+      background-color: #007bff;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px #007bff;
+      z-index: 2; /* bolinha acima da linha */
+    }
+
+    h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+
+      span {
+        font-weight: normal;
+        font-size: 0.9rem;
+        color: #666;
+        margin-left: 8px;
+      }
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: disc;
+      color: #333;
+    }
+  }
+}
+
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.project-card {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+
+  h4 {
+    margin-top: 0;
+  }
+
+  a {
+    color: #007acc;
+    text-decoration: none;
+  }
+}
+
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 30px;
+
+    .timeline-item::before {
+      left: 0;
+    }
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 5mm; 
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+  }
+
+  .headline {
+    padding: 0 15% !important;
+    text-align: center;
+  }
+
+  .timeline {
+    padding-left: 0 !important;
+
+    &::before {
+      display: none !important;
+    }
+
+    .timeline-item {
+      &::before {
+        display: none !important;
+      }
+    }
+
+  }
+
+  #projetos-github {
+    display: none !important;
+  }
+
+  .forca-quebra {
+    page-break-before: always; 
+    break-before: page;        
+  }
+
+  /* Força quebra de página depois do elemento */
+  .quebra-depois {
+    page-break-after: always;  
+    break-after: page;         
+  }
+
+  /* Impede que o elemento seja dividido entre páginas */
+  .nao-quebrar {
+    page-break-inside: avoid;  
+    break-inside: avoid;       
+  }
+
+
+}
