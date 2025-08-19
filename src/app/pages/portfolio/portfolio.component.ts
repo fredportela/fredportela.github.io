@@ -9,8 +9,7 @@ import { GithubService } from 'src/app/shared/services/github.services';
 export class PortfolioComponent implements OnInit {
   repos: any[] = [];
   loading = true;
-  currentYear: number = new Date().getFullYear();
-  
+    
   constructor(private http: GithubService) {}
 
   ngOnInit(): void {
