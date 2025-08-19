@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GithubService } from 'src/app/shared/services/github.services';
 
 @Component({
-  selector: 'app-portfolio',
-  templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss']
+  selector: 'app-my-projects',
+  templateUrl: './my-projects.component.html',
+  styleUrls: ['./my-projects.component.scss']
 })
-export class PortfolioComponent implements OnInit {
+export class MyProjectsComponent {
   repos: any[] = [];
   loading = true;
-  currentYear: number = new Date().getFullYear();
   
   constructor(private http: GithubService) {}
 

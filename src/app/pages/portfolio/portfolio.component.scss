@@ -1,8 +1,9 @@
+@import '../../shared/styles/project-card.scss';
+
 .portfolio-container {
-  max-width: 1020px;
+  max-width: 1024px;
   margin: auto;
-  padding: 20px;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 10px;
   color: #333;
 }
 
@@ -62,7 +63,7 @@ section {
 
 .timeline {
   position: relative; /* necessário para posicionamento da linha */
-  padding-left: 40px;
+  padding-left: 10px;
 
   /* Linha vertical central */
   &::before {
@@ -86,7 +87,7 @@ section {
     &::before {
       content: '';
       position: absolute;
-      left: -39px; 
+      left: -9px; 
       top: 5px;
       width: 16px;
       height: 16px;
@@ -98,7 +99,7 @@ section {
     }
 
     h3 {
-      margin: 0 0 10px 0;
+      margin: 0 0 10px 10px;
       font-size: 1.2rem;
 
       span {
@@ -118,29 +119,6 @@ section {
   }
 }
 
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-}
-
-.project-card {
-  background: #f9f9f9;
-  padding: 12px;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.05);
-
-  h4 {
-    margin-top: 0;
-  }
-
-  a {
-    color: #007acc;
-    text-decoration: none;
-  }
-}
-
 footer {
   text-align: center;
   font-size: 0.9rem;
@@ -149,11 +127,27 @@ footer {
 
 
 @media (max-width: 768px) {
-  .timeline {
-    padding-left: 30px;
 
-    .timeline-item::before {
-      left: 0;
+  .portfolio-container {
+    padding: 0;
+  }
+
+  .timeline {
+    margin-left: 0;
+    padding-left: 0;
+
+    .timeline-item {
+      &::before {
+        left: 0;
+      }
+
+      h3 {
+        margin-left: 10px;
+        span {
+          margin: 0;
+          display: block;
+        }
+      }
     }
   }
 }

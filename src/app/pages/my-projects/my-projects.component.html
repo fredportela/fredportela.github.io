@@ -1,0 +1,18 @@
+<section id="projetos-github">
+  <h2>💻 Projetos no GitHub</h2>
+
+  <div *ngIf="loading" class="projects-grid">
+    <div class="project-card skeleton" *ngFor="let s of [1,2,3,4,5,6]">
+      <div class="skeleton-title shimmer"></div>
+      <div class="skeleton-text shimmer"></div>
+      <div class="skeleton-text shimmer short"></div>
+    </div>
+  </div>
+
+  <div class="projects-grid" *ngIf="!loading">
+    <div *ngFor="let repo of repos" class="project-card">
+      <h4><a [href]="repo.html_url" target="_blank">{{ repo.name }}</a></h4>
+      <p>{{ repo.description || 'Sem descrição' }}</p>
+    </div>
+  </div>
+</section>

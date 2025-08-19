@@ -1,1 +1,35 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over">
+    <mat-nav-list>
+
+      <!-- Sobre -->
+      <a mat-list-item routerLink="/about" (click)="sidenav.close()">
+        <mat-icon>person</mat-icon>
+        <span class="title">Sobre</span>
+      </a>
+
+      <!-- Divisor -->
+      <mat-divider></mat-divider>
+
+      <!-- Curriculum -->
+      <a mat-list-item routerLink="/curriculum" (click)="sidenav.close()">
+        <mat-icon>school</mat-icon>
+        <span class="title">Currículo</span>
+      </a>
+
+      <!-- Meus Projetos -->
+      <a mat-list-item routerLink="/my-projects" (click)="sidenav.close()">
+        <mat-icon>work</mat-icon>
+        <span class="title">Meus Projetos</span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-header (menuToggle)="sidenav.toggle()"></app-header>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

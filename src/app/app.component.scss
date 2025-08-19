@@ -1,0 +1,41 @@
+mat-sidenav-content {
+  > div {
+    padding: 10px;
+  }
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.mat-mdc-nav-list {
+  a.mat-mdc-list-item {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+      margin-right: 16px; /* espaço entre ícone e texto */
+      min-width: 24px;    /* garante que todos os ícones fiquem alinhados */
+      text-align: center;
+    }
+
+    .title {
+      flex: 1;
+      vertical-align: super;
+    }
+  }
+
+}
+
+
+
+@media print {
+  @page {
+    size: A4;
+    margin: 5mm; 
+  }
+
+  mat-sidenav {
+    display: none;
+  }
+}
