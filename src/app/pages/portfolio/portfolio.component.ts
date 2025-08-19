@@ -23,4 +23,8 @@ export class PortfolioComponent implements OnInit {
       error: () => this.loading = false
     });
   }
+
+  onPrint(): void {
+    window.print();
+  }
 }
