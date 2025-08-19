@@ -3,13 +3,12 @@ footer {
   margin: 0 auto;
   text-align: center;
   padding: 10px 0;
-  color: #1976d2;
   font-weight: 500;
-  font-size: 15px;
+  font-size: .9rem;
+  color: #666;
 }
 
 @media print {
-
   footer {
     display: none;
   }
