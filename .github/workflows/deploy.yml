@@ -1,0 +1,36 @@
+name: Deploy Angular to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # dispara quando fizer push no main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clonar o repositório
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Instalar Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Instalar dependências
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build Angular
+      - name: Build Angular app
+        run: npm run build -- --configuration production
+
+      # 5. Deploy para GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # branch de destino
+          folder: dist/portfolio-fred # pasta do build (confirme no angular.json)
