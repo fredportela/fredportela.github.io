@@ -178,8 +178,12 @@ footer {
     padding: 0;
   }
 
-  .print-actions,
-  .no-print { 
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    color: black;
+  }
+
+  .print-actions{ 
     display: none !important; 
   }
   
