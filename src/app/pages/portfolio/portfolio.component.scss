@@ -92,7 +92,7 @@ section {
   .timeline-item {
     position: relative; /* necessário para posicionamento da bolinha */
     margin-bottom: 30px;
-    padding-left: 10px 0 0 20px;
+    padding: 10px 0 0 20px;
 
     /* Bolinha para cada item */
     &::before {
