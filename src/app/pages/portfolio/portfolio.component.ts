@@ -10,6 +10,8 @@ export class PortfolioComponent implements OnInit {
   repos: any[] = [];
   loading = true;
     
+  private encoded = 'ZnBvcnRlbGFAZ21haWwuY29t';
+
   constructor(private http: GithubService) {}
 
   ngOnInit(): void {
@@ -22,6 +24,11 @@ export class PortfolioComponent implements OnInit {
       error: () => this.loading = false
     });
   }
+
+  
+get email(): string {
+  return atob(this.encoded);
+}
 
   onPrint(): void {
     window.print();
