@@ -80,7 +80,7 @@ section {
   &::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -5px;
     left: 10px; 
     width: 4px;
     height: 100%;
@@ -92,14 +92,14 @@ section {
   .timeline-item {
     position: relative; /* necessário para posicionamento da bolinha */
     margin-bottom: 30px;
-    padding-left: 20px;
+    padding-left: 10px 0 0 20px;
 
     /* Bolinha para cada item */
     &::before {
       content: '';
       position: absolute;
       left: -9px; 
-      top: 5px;
+      top: 15px;
       width: 16px;
       height: 16px;
       background-color: #007bff;
