@@ -10,7 +10,9 @@ export class PortfolioComponent implements OnInit {
   repos: any[] = [];
   loading = true;
     
-  private encoded = 'ZnBvcnRlbGFAZ21haWwuY29t';
+  private emailEncode = 'ZnBvcnRlbGFAZ21haWwuY29t';
+  private telefoneEncode = 'KDYxKSA5ODE0NS02OTY3';
+  
 
   constructor(private http: GithubService) {}
 
@@ -24,11 +26,14 @@ export class PortfolioComponent implements OnInit {
       error: () => this.loading = false
     });
   }
-
   
-get email(): string {
-  return atob(this.encoded);
-}
+  get email(): string {
+    return atob(this.emailEncode);
+  }
+
+  get telefone(): string {
+    return atob(this.telefoneEncode);
+  }
 
   onPrint(): void {
     window.print();
