@@ -1,0 +1,113 @@
+.promotions-page {
+  padding: 24px;
+}
+
+.promotions-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.search-box {
+  display: flex;
+  gap: 8px;
+}
+
+.search-box input {
+  width: 360px;
+  max-width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
+}
+
+.search-box button,
+.promotion-card button {
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.promotion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.promotion-card {
+  position: relative;
+  border: 1px solid #e2e2e2;
+  border-radius: 10px;
+  padding: 14px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.promotion-card img {
+  width: 100%;
+  height: 170px;
+  object-fit: contain;
+}
+
+.promotion-card h3 {
+  font-size: 15px;
+  line-height: 20px;
+  min-height: 40px;
+  margin: 0;
+}
+
+.description {
+  font-size: 13px;
+  color: #666;
+}
+
+.platform {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: #f2f2f2;
+}
+
+.price-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.original-price {
+  color: #888;
+  text-decoration: line-through;
+  font-size: 13px;
+}
+
+.price-box strong {
+  font-size: 20px;
+}
+
+.discount {
+  color: #0a7f3f;
+  font-weight: 700;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badges span {
+  font-size: 11px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 4px 8px;
+}

@@ -1,0 +1,75 @@
+<div class="promotions-page">
+  <div class="promotions-header">
+    <h2>Principais promoções</h2>
+
+    <div class="search-box">
+      <input
+        #searchInput
+        type="text"
+        placeholder="Buscar produto, exemplo: notebook, celular, air fryer"
+      />
+
+      <button type="button" (click)="search(searchInput.value)">
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Carregando promoções...
+  </div>
+
+  <div *ngIf="!loading && promotions.length === 0" class="empty">
+    Nenhuma promoção encontrada.
+  </div>
+
+  <div class="promotion-grid" *ngIf="!loading && promotions.length > 0">
+    <div
+      class="promotion-card"
+      *ngFor="let promotion of promotions"
+    >
+      <div class="platform">
+        {{ promotion.platform }}
+      </div>
+
+      <img
+        *ngIf="promotion.imageUrl"
+        [src]="promotion.imageUrl"
+        [alt]="promotion.title"
+      />
+
+      <h3>{{ promotion.title }}</h3>
+
+      <p class="description" *ngIf="promotion.description">
+        {{ promotion.description }}
+      </p>
+
+      <div class="price-box">
+        <span
+          class="original-price"
+          *ngIf="promotion.originalPrice"
+        >
+          {{ promotion.originalPrice | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+        </span>
+
+        <strong>
+          {{ promotion.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+        </strong>
+      </div>
+
+      <div class="discount" *ngIf="promotion.discountPercent">
+        {{ promotion.discountPercent }}% OFF
+      </div>
+
+      <div class="badges">
+        <span *ngIf="promotion.freeShipping">Frete grátis</span>
+        <span *ngIf="promotion.primeOrFull">Entrega rápida</span>
+        <span *ngIf="promotion.rating">⭐ {{ promotion.rating }}</span>
+      </div>
+
+      <button type="button" (click)="openPromotion(promotion)">
+        Ver oferta
+      </button>
+    </div>
+  </div>
+</div>
