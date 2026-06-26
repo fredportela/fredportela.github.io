@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { finalize } from 'rxjs';
-import { Promotion } from 'src/app/affiliate/models/promotion.model';
-import { PromotionFilter } from 'src/app/affiliate/models/romotion-filter.model';
-import { AffiliatePromotionService } from 'src/app/affiliate/services/affiliate-promotion.service';
+
+import { Promotion } from '../../affiliate/models/promotion.model';
+import { PromotionFilter } from '../../affiliate/models/romotion-filter.model';
+import { AffiliatePromotionService } from '../../affiliate/services/affiliate-promotion.service';
 
 @Component({
   selector: 'app-promotion-list',
-  templateUrl: './promotion-list.component.html'
+  templateUrl: './promotion-list.component.html',
+  styleUrls: ['./promotion-list.component.scss']
 })
 export class PromotionListComponent implements OnInit {
-  promotions: Promotion[] = [];
+  promotions: WritableSignal<Promotion[]> = signal<Promotion[]>([]);
   loading = false;
 
   filter: PromotionFilter = {
@@ -40,10 +42,16 @@ export class PromotionListComponent implements OnInit {
       .pipe(finalize(() => this.loading = false))
       .subscribe({
         next: (promotions) => {
-          this.promotions = promotions;
+          const lista = this.normalizarPromocoes(promotions);
+
+          this.promotions.set(lista);
+
+          console.log('Total de promoções:', lista.length);
+          console.log('Promoções:', lista);
         },
         error: (error) => {
           console.error('Erro ao carregar promoções:', error);
+          this.promotions.set([]);
         }
       });
   }
@@ -58,6 +66,25 @@ export class PromotionListComponent implements OnInit {
   }
 
   openPromotion(promotion: Promotion): void {
-    window.open(promotion.affiliateUrl, '_blank');
+    window.open(promotion.affiliateUrl || promotion.productUrl, '_blank');
+  }
+
+  trackByPromotion(index: number, promotion: Promotion): string {
+    return promotion?.id || String(index);
+  }
+
+  private normalizarPromocoes(promotions: unknown): Promotion[] {
+    if (!Array.isArray(promotions)) {
+      return [];
+    }
+
+    return promotions
+      .flat()
+      .filter((item): item is Promotion => {
+        return !!item
+          && typeof item === 'object'
+          && !!(item as Promotion).id
+          && !!(item as Promotion).title;
+      });
   }
 }

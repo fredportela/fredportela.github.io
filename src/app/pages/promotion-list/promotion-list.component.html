@@ -1,12 +1,16 @@
 <div class="promotions-page">
   <div class="promotions-header">
-    <h2>Principais promoções</h2>
+    <div>
+      <h2>Principais promoções</h2>
+      <p>Garimpos selecionados de tecnologia, casa e utilidades</p>
+    </div>
 
     <div class="search-box">
       <input
         #searchInput
         type="text"
-        placeholder="Buscar produto, exemplo: notebook, celular, air fryer"
+        placeholder="Buscar produto: notebook, celular, air fryer..."
+        (keyup.enter)="search(searchInput.value)"
       />
 
       <button type="button" (click)="search(searchInput.value)">
@@ -15,61 +19,85 @@
     </div>
   </div>
 
-  <div *ngIf="loading" class="loading">
+  <div *ngIf="loading" class="state-box loading">
     Carregando promoções...
   </div>
 
-  <div *ngIf="!loading && promotions.length === 0" class="empty">
+  <div *ngIf="!loading && promotions().length === 0" class="state-box empty">
     Nenhuma promoção encontrada.
   </div>
 
-  <div class="promotion-grid" *ngIf="!loading && promotions.length > 0">
-    <div
+  <div class="promotion-grid" *ngIf="!loading && promotions().length > 0">
+    <article
       class="promotion-card"
-      *ngFor="let promotion of promotions"
+      *ngFor="let promotion of promotions(); trackBy: trackByPromotion"
     >
-      <div class="platform">
-        {{ promotion.platform }}
-      </div>
+      <a
+        class="promotion-link"
+        [href]="promotion.affiliateUrl || promotion.productUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="'Abrir oferta: ' + promotion.title"
+      >
+        <div class="image-box">
+          <div class="platform">
+            {{ promotion.platform }}
+          </div>
 
-      <img
-        *ngIf="promotion.imageUrl"
-        [src]="promotion.imageUrl"
-        [alt]="promotion.title"
-      />
+          <img
+            *ngIf="promotion.imageUrl; else semImagem"
+            class="promotion-image"
+            [src]="promotion.imageUrl"
+            [alt]="promotion.title"
+          />
 
-      <h3>{{ promotion.title }}</h3>
+          <ng-template #semImagem>
+            <div class="no-image">
+              Sem imagem
+            </div>
+          </ng-template>
+        </div>
 
-      <p class="description" *ngIf="promotion.description">
-        {{ promotion.description }}
-      </p>
+        <div class="promotion-content">
+          <h3>
+            {{ promotion.title }}
+          </h3>
 
-      <div class="price-box">
-        <span
-          class="original-price"
-          *ngIf="promotion.originalPrice"
-        >
-          {{ promotion.originalPrice | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
-        </span>
+          <p class="description" *ngIf="promotion.description">
+            {{ promotion.description }}
+          </p>
 
-        <strong>
-          {{ promotion.price | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
-        </strong>
-      </div>
+          <div class="price-box">
+            <span class="original-price" *ngIf="promotion.originalPrice">
+              {{ promotion.originalPrice | currency:'BRL':'symbol':'1.2-2' }}
+            </span>
 
-      <div class="discount" *ngIf="promotion.discountPercent">
-        {{ promotion.discountPercent }}% OFF
-      </div>
+            <strong>
+              {{ promotion.price | currency:'BRL':'symbol':'1.2-2' }}
+            </strong>
+          </div>
 
-      <div class="badges">
-        <span *ngIf="promotion.freeShipping">Frete grátis</span>
-        <span *ngIf="promotion.primeOrFull">Entrega rápida</span>
-        <span *ngIf="promotion.rating">⭐ {{ promotion.rating }}</span>
-      </div>
+          <div class="meta-row">
+            <span class="discount" *ngIf="promotion.discountPercent">
+              {{ promotion.discountPercent }}% OFF
+            </span>
 
-      <button type="button" (click)="openPromotion(promotion)">
-        Ver oferta
-      </button>
-    </div>
+            <span class="rating" *ngIf="promotion.rating">
+              ⭐ {{ promotion.rating }}
+            </span>
+          </div>
+
+          <div class="badges">
+            <span *ngIf="promotion.freeShipping">Frete grátis</span>
+            <span *ngIf="promotion.primeOrFull">Entrega rápida</span>
+            <span *ngIf="promotion.storeName">{{ promotion.storeName }}</span>
+          </div>
+
+          <span class="text-link">
+            Abrir oferta
+          </span>
+        </div>
+      </a>
+    </article>
   </div>
 </div>
