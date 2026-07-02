@@ -20,27 +20,27 @@ export class AffiliatePromotionService {
 
   listBestPromotions(filter: PromotionFilter): Observable<Promotion[]> {
     const platforms = filter.platforms || [
-      'MERCADO_LIVRE',
-      'SHOPEE',
-      'AMAZON',
-      'ALIEXPRESS'
+      AffiliatePlatform.MERCADO_LIVRE,
+      AffiliatePlatform.SHOPEE,
+      AffiliatePlatform.AMAZON,
+      AffiliatePlatform.ALIEXPRESS,
     ];
 
     const requests: Observable<Promotion[]>[] = [];
 
-    if (platforms.includes('MERCADO_LIVRE')) {
+    if (platforms.includes(AffiliatePlatform.MERCADO_LIVRE)) {
       requests.push(this.safeRequest(this.mercadoLivreService.listPromotions(filter)));
     }
 
-    if (platforms.includes('SHOPEE')) {
+    if (platforms.includes(AffiliatePlatform.SHOPEE)) {
       requests.push(this.safeRequest(this.shopeeService.listPromotions(filter)));
     }
 
-    if (platforms.includes('AMAZON')) {
+    if (platforms.includes(AffiliatePlatform.AMAZON)) {
       requests.push(this.safeRequest(this.amazonService.listPromotions(filter)));
     }
 
-    if (platforms.includes('ALIEXPRESS')) {
+    if (platforms.includes(AffiliatePlatform.ALIEXPRESS)) {
       requests.push(this.safeRequest(this.aliexpressService.listPromotions(filter)));
     }
 

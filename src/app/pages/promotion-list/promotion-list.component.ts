@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { finalize } from 'rxjs';
 
-import { Promotion } from '../../affiliate/models/promotion.model';
+import { AffiliatePlatform, Promotion } from '../../affiliate/models/promotion.model';
 import { PromotionFilter } from '../../affiliate/models/romotion-filter.model';
 import { AffiliatePromotionService } from '../../affiliate/services/affiliate-promotion.service';
 
@@ -17,12 +17,12 @@ export class PromotionListComponent implements OnInit {
   filter: PromotionFilter = {
     query: 'ofertas',
     minDiscount: 10,
-    limit: 40,
+    limit: 500,
     platforms: [
-      'MERCADO_LIVRE',
-      'SHOPEE',
-      'AMAZON',
-      'ALIEXPRESS'
+      AffiliatePlatform.MERCADO_LIVRE,
+      // AffiliatePlatform.SHOPEE,
+      // AffiliatePlatform.AMAZON,
+      AffiliatePlatform.ALIEXPRESS
     ]
   };
 
@@ -43,11 +43,7 @@ export class PromotionListComponent implements OnInit {
       .subscribe({
         next: (promotions) => {
           const lista = this.normalizarPromocoes(promotions);
-
           this.promotions.set(lista);
-
-          console.log('Total de promoções:', lista.length);
-          console.log('Promoções:', lista);
         },
         error: (error) => {
           console.error('Erro ao carregar promoções:', error);

@@ -1,8 +1,9 @@
-export type AffiliatePlatform =
-  | 'MERCADO_LIVRE'
-  | 'SHOPEE'
-  | 'AMAZON'
-  | 'ALIEXPRESS';
+export enum AffiliatePlatform {
+  MERCADO_LIVRE = 'MERCADO_LIVRE',
+  SHOPEE = 'SHOPEE',
+  AMAZON = 'AMAZON',
+  ALIEXPRESS = 'ALIEXPRESS',
+}
 
 export interface Promotion {
   id: string;
