@@ -6,7 +6,8 @@
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:ghpages": "ng build --configuration production --base-href / && cp dist/portfolio-fred/index.html dist/portfolio-fred/404.html"
   },
   "private": true,
   "dependencies": {
