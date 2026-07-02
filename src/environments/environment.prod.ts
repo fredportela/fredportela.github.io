@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.datalegis.net'
+  apiUrl: 'https://api.datalegis.net',
 };
