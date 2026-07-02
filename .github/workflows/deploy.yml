@@ -28,9 +28,13 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production
 
+      - name: Create GitHub Pages fallback
+        run: cp dist/portfolio-fred/index.html dist/portfolio-fred/404.html
+
       # 5. Deploy para GitHub Pages
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages # branch de destino
           folder: dist/portfolio-fred # pasta do build (confirme no angular.json)
+          clean: true
