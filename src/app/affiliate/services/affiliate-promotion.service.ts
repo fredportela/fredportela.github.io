@@ -22,7 +22,7 @@ export class AffiliatePromotionService {
     const platforms = filter.platforms || [
       AffiliatePlatform.MERCADO_LIVRE,
       AffiliatePlatform.SHOPEE,
-      AffiliatePlatform.AMAZON,
+      //AffiliatePlatform.AMAZON,
       AffiliatePlatform.ALIEXPRESS,
     ];
 
