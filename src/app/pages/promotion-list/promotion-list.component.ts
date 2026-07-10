@@ -16,11 +16,11 @@ export class PromotionListComponent implements OnInit {
 
   filter: PromotionFilter = {
     query: 'ofertas',
-    minDiscount: 10,
+    minDiscount: 0,
     limit: 500,
     platforms: [
       AffiliatePlatform.MERCADO_LIVRE,
-      // AffiliatePlatform.SHOPEE,
+      AffiliatePlatform.SHOPEE,
       // AffiliatePlatform.AMAZON,
       AffiliatePlatform.ALIEXPRESS
     ]
