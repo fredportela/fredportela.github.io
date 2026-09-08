@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Versioning and deployment
 
-Every build generates `assets/version.json` with the package version, commit and build date. The running application checks this file once a minute and reloads automatically when a new version is published.
+Every build generates `assets/version.json` with the package version, commit and build date in the `America/Sao_Paulo` time zone. The running application checks this file once a minute and reloads automatically when a new version is published.
 
 To publish a version, open **Actions → Create version → Run workflow** and choose `patch`, `minor` or `major`. The workflow updates `package.json` and `package-lock.json`, creates a Git tag and GitHub Release, and deploys the application to GitHub Pages. Pushes to `main` continue to deploy normally but do not change the semantic version.
 

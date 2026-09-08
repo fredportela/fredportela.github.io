@@ -7,6 +7,7 @@ export interface BuildInfo {
   version: string;
   buildId: string;
   builtAt: string;
+  timeZone?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -15,11 +16,7 @@ export class AppVersionService implements OnDestroy {
   private readonly subscription: Subscription;
   private reloading = false;
 
-  readonly buildInfo$ = new BehaviorSubject<BuildInfo>({
-    version: this.loadedVersion,
-    buildId: 'local',
-    builtAt: new Date().toISOString()
-  });
+  readonly buildInfo$ = new BehaviorSubject<BuildInfo | null>(null);
 
   constructor(private readonly http: HttpClient) {
     this.subscription = interval(60_000).pipe(
