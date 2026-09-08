@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import packageJson from '../../../../../package.json';
+import { AppVersionService } from '../../services/app-version.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +7,8 @@ import packageJson from '../../../../../package.json';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  currentYear: number = new Date().getFullYear();
-  appVersion: string = packageJson.version;
-  buildDate: Date = new Date();
+  readonly currentYear = new Date().getFullYear();
+  readonly buildInfo$ = this.appVersionService.buildInfo$;
+
+  constructor(private readonly appVersionService: AppVersionService) {}
 }

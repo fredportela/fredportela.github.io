@@ -1,0 +1,58 @@
+name: Create version
+
+on:
+  workflow_dispatch:
+    inputs:
+      increment:
+        description: Semantic version increment
+        required: true
+        default: patch
+        type: choice
+        options: [patch, minor, major]
+
+permissions:
+  contents: write
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Increment version
+        id: version
+        shell: bash
+        run: |
+          npm version "${{ inputs.increment }}" -m "chore(release): v%s [skip ci]"
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          git push origin main "v$VERSION"
+
+  deploy:
+    needs: version
+    uses: ./.github/workflows/deploy.yml
+    secrets: inherit
+
+  github-release:
+    needs: [version, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.version.outputs.version }}
+        run: gh release create "v$VERSION" --repo "${{ github.repository }}" --generate-notes --title "v$VERSION"

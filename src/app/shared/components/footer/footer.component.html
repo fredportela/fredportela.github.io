@@ -1,4 +1,5 @@
-<!-- Rodapé -->
 <footer>
-  <p>© {{ currentYear }} Fred Portela • v{{ appVersion }} • build: {{ buildDate | date:'dd/MM/yyyy, HH:mm' }}</p>
+  <p *ngIf="buildInfo$ | async as build">
+    © {{ currentYear }} Fred Portela • v{{ build.version }} • build: {{ build.builtAt | date:'dd/MM/yyyy, HH:mm' }}
+  </p>
 </footer>
