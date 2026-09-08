@@ -14,6 +14,7 @@ export interface BuildInfo {
 export class AppVersionService implements OnDestroy {
   private readonly loadedVersion = packageJson.version;
   private readonly subscription: Subscription;
+  private loadedBuiltAt: string | null = null;
   private reloading = false;
 
   readonly buildInfo$ = new BehaviorSubject<BuildInfo | null>(null);
@@ -27,12 +28,20 @@ export class AppVersionService implements OnDestroy {
         return;
       }
 
+      const versionChanged = info.version !== this.loadedVersion;
+      const buildChanged = this.loadedBuiltAt !== null && info.builtAt !== this.loadedBuiltAt;
+
+      if (this.loadedBuiltAt === null) {
+        this.loadedBuiltAt = info.builtAt;
+      }
+
       this.buildInfo$.next(info);
 
-      if (info.version !== this.loadedVersion && !this.reloading) {
+      if ((versionChanged || buildChanged) && !this.reloading) {
         this.reloading = true;
         const updatedUrl = new URL(window.location.href);
         updatedUrl.searchParams.set('app-version', info.version);
+        updatedUrl.searchParams.set('app-build', info.builtAt);
         window.location.replace(updatedUrl);
       }
     });
