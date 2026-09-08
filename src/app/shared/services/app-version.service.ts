@@ -14,7 +14,7 @@ export interface BuildInfo {
 export class AppVersionService implements OnDestroy {
   private readonly loadedVersion = packageJson.version;
   private readonly subscription: Subscription;
-  private loadedBuiltAt: string | null = null;
+  private loadedBuiltId: string | null = null;
   private reloading = false;
 
   readonly buildInfo$ = new BehaviorSubject<BuildInfo | null>(null);
@@ -29,10 +29,10 @@ export class AppVersionService implements OnDestroy {
       }
 
       const versionChanged = info.version !== this.loadedVersion;
-      const buildChanged = this.loadedBuiltAt !== null && info.builtAt !== this.loadedBuiltAt;
+      const buildChanged = this.loadedBuiltId !== null && info.buildId !== this.loadedBuiltId;
 
-      if (this.loadedBuiltAt === null) {
-        this.loadedBuiltAt = info.builtAt;
+      if (this.loadedBuiltId === null) {
+        this.loadedBuiltId = info.buildId;
       }
 
       this.buildInfo$.next(info);
