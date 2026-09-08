@@ -13,7 +13,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MyProjectsComponent } from './pages/my-projects/my-projects.component';
 import { AboutComponent } from './pages/about/about.component';
-import { PromotionListComponent } from './pages/promotion-list/promotion-list.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { PromotionListComponent } from './pages/promotion-list/promotion-list.co
     PortfolioComponent,
     MyProjectsComponent,
     AboutComponent,
-    PromotionListComponent
   ],
   imports: [
     BrowserModule,
