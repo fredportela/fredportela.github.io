@@ -44,6 +44,10 @@ jobs:
 
   deploy:
     needs: version
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
 
