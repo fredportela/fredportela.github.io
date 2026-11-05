@@ -10,7 +10,7 @@ export class PortfolioComponent implements OnInit {
   repos: any[] = [];
   loading = true;
     
-  private emailEncode = 'ZnBvcnRlbGFAZ21haWwuY29t';
+  private emailEncode = 'ZnJlZHBvcnRlbGFAZ21haWwuY29t';
   private telefoneEncode = 'KDYxKSA5ODE0NS02OTY3';
   
 

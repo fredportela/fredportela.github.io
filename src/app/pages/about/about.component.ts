@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
-  private emailEncode = 'ZnBvcnRlbGFAZ21haWwuY29t';
+  private emailEncode = 'ZnJlZHBvcnRlbGFAZ21haWwuY29t';
   private telefoneEncode = 'KDYxKSA5ODE0NS02OTY3';
   
   get email(): string {
