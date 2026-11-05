@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
   group: github-pages
@@ -16,11 +18,16 @@ concurrency:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: main
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v6
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -32,9 +39,10 @@ jobs:
         run: npm run build -- --configuration production
       - name: Create GitHub Pages fallback
         run: cp dist/portfolio-fred/index.html dist/portfolio-fred/404.html
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          branch: gh-pages
-          folder: dist/portfolio-fred
-          clean: true
+          path: dist/portfolio-fred
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
