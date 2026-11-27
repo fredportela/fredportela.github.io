@@ -1,6 +1,6 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { MyProjectsComponent } from './my-projects.component';
 
@@ -10,9 +10,8 @@ describe('MyProjectsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [MyProjectsComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [MyProjectsComponent],
+      providers: [provideHttpClient(), provideHttpClientTesting()]
     });
     fixture = TestBed.createComponent(MyProjectsComponent);
     component = fixture.componentInstance;

@@ -1,22 +1,22 @@
-import { Component } from '@angular/core';
-import { GithubService } from 'src/app/shared/services/github.services';
+import { Component, OnInit } from '@angular/core';
+import { GithubRepo } from '../../shared/models/githubrepo.model';
+import { GithubService } from '../../shared/services/github.services';
 
 @Component({
   selector: 'app-my-projects',
   templateUrl: './my-projects.component.html',
   styleUrls: ['./my-projects.component.scss']
 })
-export class MyProjectsComponent {
-  repos: any[] = [];
+export class MyProjectsComponent implements OnInit {
+  repos: GithubRepo[] = [];
   loading = true;
   
-  constructor(private http: GithubService) {}
+  constructor(private readonly github: GithubService) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.http.list().subscribe({
+    this.github.list().subscribe({
       next: data => {
-        this.repos = data.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+        this.repos = data;
         this.loading = false;
       },
       error: () => this.loading = false

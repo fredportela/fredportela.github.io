@@ -1,5 +1,5 @@
+import { provideRouter } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AboutComponent } from './about.component';
 
@@ -9,8 +9,8 @@ describe('AboutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AboutComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      imports: [AboutComponent],
+      providers: [provideRouter([])]
     });
     fixture = TestBed.createComponent(AboutComponent);
     component = fixture.componentInstance;

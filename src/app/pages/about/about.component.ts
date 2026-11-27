@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [RouterLink, MatDividerModule, MatIconModule],
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']

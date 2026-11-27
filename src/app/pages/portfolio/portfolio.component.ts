@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubService } from 'src/app/shared/services/github.services';
+import { GithubRepo } from '../../shared/models/githubrepo.model';
+import { GithubService } from '../../shared/services/github.services';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  imports: [MatButtonModule, MatIconModule],
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss']
 })
 export class PortfolioComponent implements OnInit {
-  repos: any[] = [];
+  repos: GithubRepo[] = [];
   loading = true;
     
   private emailEncode = 'ZnJlZHBvcnRlbGFAZ21haWwuY29t';
   private telefoneEncode = 'KDYxKSA5ODE0NS02OTY3';
   
 
-  constructor(private http: GithubService) {}
+  constructor(private readonly github: GithubService) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.http.list().subscribe({
+    this.github.list().subscribe({
       next: data => {
-        this.repos = data.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+        this.repos = data;
         this.loading = false;
       },
       error: () => this.loading = false
