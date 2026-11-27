@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
+  standalone: true,
   imports: [MatButtonModule, MatIconModule],
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
